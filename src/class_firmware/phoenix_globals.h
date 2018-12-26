@@ -1,6 +1,4 @@
-/**
- * phoenix_globals.h
- */
+//mine
 #pragma once
 
 #include "phoenix_common.h"

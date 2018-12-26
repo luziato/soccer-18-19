@@ -1,19 +1,17 @@
-//phoenix_line.cpp
+//mine
 #include "phoenix_line.h"
 #include "phoenix-line-internals.h"
 #include<math.h>
 
 
-
-
-
+//aggiorno la direzione di fuga
 Static void PhoenixLineHandler_updateEDir(PhoenixLineHandler*h)
 {
   h->escape_directon[0]=-h->border_x;//x
   h->escape_directon[1]=-h->border_y;//y
   h->escape_directon[2]=-0;//rotation
 }
-
+//inizializzo  le due classi PhoenixLineHandler e PhoenixLineDetector
 void PhoenixLineHandler_init(PhoenixLineHandler*h, PhoneixLineDetector*ld)
 {
   h->ld=ld;

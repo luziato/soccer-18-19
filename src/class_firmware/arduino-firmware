@@ -1,0 +1,19 @@
+//mine
+#define NUM_MOTORS 3
+#include <Arduino.h>
+#include "phoenixjoint.h"
+#include "phoenixdrive.h"
+#include "phoenixglobal.h"
+#include "ares_pins.h" 
+void setup ()
+{
+  Selial.begin(9600);
+  joints[0]=init.(dati[0].pins);
+  joints[1]=init.(dati[1].pins);
+  joints[2]=init.(dati[2].pins);
+}
+void loop()
+{
+  Serial.println("Loaded");
+  delay(1000);
+}

@@ -1,6 +1,4 @@
-/**
- * phoenix_line.h
- */
+//mine
 #pragma once
 #include <Arduino.h>
 #include "phoenix_line_internals.h"
@@ -20,8 +18,7 @@ typedef struct {
   int16_t escape_ttl;
 } PhoenixLineHandler;
 
-void PhoenixLineHandler_init(PhoenixLineHandler*,
-                            PhoenixLineDetector*);
+void PhoenixLineHandler_init(PhoenixLineHandler*, PhoenixLineDetector*);
 
 OpStatus PhoenixLineHandler_handle(PhoenixLineHandler*);
 

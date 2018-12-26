@@ -1,16 +1,16 @@
-/**
- * phoenix_globals.cpp
- */
+//mine
 #include "phoenix_globals.h"
 
-Adafruit_ADS1015 line_adc[NUM_LINEADC] = {
-  Adafruit_ADS1015(LINE_ADC_ADDR_FRONT),
-  Adafruit_ADS1015(LINE_ADC_ADDR_LEFT),
-  Adafruit_ADS1015(LINE_ADC_ADDR_RIGHT),
-  Adafruit_ADS1015(LINE_ADC_ADDR_BACK)
+Adafruit_ADS1015 line_adc[4] 
+{  //dichiaro i sensori di linea 
+    Adafruit_ADS1015(0),
+    Adafruit_ADS1015(1),
+    Adafruit_ADS1015(2),
+    Adafruit_ADS1015(3)
 };
 
-PhoenixLineDetector line_sensors[NUM_LINEDETECTORS] = {
+PhoenixLineDetector line_sensors[NUM_LINEDETECTORS] = 
+{
   { // 0
     index : 0,
     detected : 0,
@@ -33,7 +33,8 @@ PhoenixLineDetector line_sensors[NUM_LINEDETECTORS] = {
   }
 };
 
-PhoenixLineHandler line_handler = {
+PhoenixLineHandler line_handler = 
+{
   ld : line_sensors,
   mask : 0x0,
   border_x : 0,
