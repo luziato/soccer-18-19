@@ -1,0 +1,21 @@
+{
+    "configurations": [
+        {
+            "name": "Linux",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "/home/emanuele/arduino/hardware/tools/avr/avr/include",
+                "/home/emanuele/arduino/hardware/arduino/avr/cores/arduino/**",
+                "/home/emanuele/arduino/hardware/arduino/avr/libraries/**",
+                "/home/emanuele/arduino/libraries/**"
+
+            ],
+            "defines": [],
+            "compilerPath": "/usr/bin/gcc",
+            "cStandard": "c11",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "clang-x64"
+        }
+    ],
+    "version": 4
+}
