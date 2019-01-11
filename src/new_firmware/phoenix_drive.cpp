@@ -67,9 +67,9 @@ void PhoenixDrive_handle(PhoenixDrive* d)
     for(int j=0;j<NUM_JOINTS;j++)
     {
       speed=speed+ikmatrix[r][j]*comp_vec[j];
-      d->joints[r].velocita=speed;
       //calcola la velocità di joints->speed la matrice con la matrice in alto e il vettore {rot, x, y}
     }
+    PhoenixJoint_setSpeed(&d->joints[r],speed);
     //ogni elemento dell'array è riferito ad un motore
     //ogni elemento ha un parametro speed
   }
