@@ -1,9 +1,9 @@
 //mine
 #pragma once
 #include "phoenix_line_internals.h"
-#include "phoenix_globals.h"
+//#include "phoenix_globals.h"
 #include <math.h>
-#include <Adafruit_ADS1015.h> 
+
 
 void PhoenixLineSensor_init(PhoenixLineSensor* d) 
 {
@@ -13,7 +13,7 @@ void PhoenixLineSensor_init(PhoenixLineSensor* d)
   d->misura_min=0;
   d->misura_max=0;
   d->soglia=0;
-  //line_adc[d->adc_addr].begin();//inserisco i valori nel metodo begin() di adc
+
 }
 
 

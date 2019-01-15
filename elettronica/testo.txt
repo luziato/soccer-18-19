@@ -1,0 +1,7 @@
+da INSERIRE NELLO SCHEMATICO
+
+-connettore per la batteria
+-connettore per la pixi
+-connettori pin femmina per circuito i4c
+-swithc alimentazione
+-swithc alimentazione motori

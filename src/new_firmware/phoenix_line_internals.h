@@ -1,7 +1,7 @@
 //mine
 #pragma once
 #include <Arduino.h>
-#include "Adafruit_ADS1015.h"
+
 
 
 
@@ -21,7 +21,7 @@ typedef struct
 
 void PhoenixLineSensor_init(PhoenixLineSensor* d);
                               
-void PhoenixLineSensor_handle(PhoenixLineSensor* d;
+void PhoenixLineSensor_handle(PhoenixLineSensor* d);
 
 void PhoenixLineSensor_startCalib(PhoenixLineSensor* d);
 
