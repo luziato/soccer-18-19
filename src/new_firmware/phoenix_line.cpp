@@ -29,7 +29,7 @@ void PhoenixLineHandler_init(PhoenixLineHandler*h, PhoenixLineSensor*s)
   h->escape_y=0;
   h->escape_flag=0;
   h->escape_ttl=ESCAPE_TTL;
-  h->line_sensors->s;
+  h->line_sensors=s;
 }
 
 void PhoenixLineHandler_reset(PhoenixLineHandler* h)
@@ -41,7 +41,7 @@ void PhoenixLineHandler_reset(PhoenixLineHandler* h)
 
   for(int i=0;i<NUM_LINEDETECTORS;i++)
   {
-   h->line_sensors[i]->PhoenixLineHandler_reset(line_sensors);
+   PhoenixLineSensor_reset(&h->line_sensors[i]);
   }
 
 }
@@ -51,16 +51,16 @@ void PhoenixLineHandler_reset(PhoenixLineHandler* h)
 void PhoenixLineHandler_handle(PhoenixLineHandler* h)
 {
   uint8_t a=0;
-  h->line_sensors->PhoenixLineSensor_handle;
+  PhoenixLineSensor_handle;
   for(int i=0;i<NUM_LINEDETECTORS;i++)
   {
 
-    if(mask_read(mask,i)==0)
+    if(mask_read(&h->mask,i)==0)
     {
-      a=&line_sensors[i]->PhoenixLineSensor_getStatus(line_sensors);
+      a=PhoenixLineSensor_getStatus(&h->line_sensors[i]);
       if(a>0)
       {
-        mask_setBit(mask,i);
+        mask_setBit(&h->mask,i);
         h->escape_x+=h->line_sensors[i].x;
         h->escape_y+=h->line_sensors[i].y;
         

@@ -19,6 +19,7 @@ void PhoenixLineSensor_init(PhoenixLineSensor* d)
 
 void PhoenixLineSensor_handle(PhoenixLineSensor* d) 
 {
+  d->misura=analogRead(d->pin_reading);
   if(d->calibra_flag==true)
   {
     if(d->misura>d->misura_max)
@@ -35,25 +36,24 @@ void PhoenixLineSensor_handle(PhoenixLineSensor* d)
   {
 	  d->detect_flag = 1;
   }
-  return Success;
 }
 
 void PhoenixLineSensor_startCalib(PhoenixLineSensor* d)
 {
-l->calibra_flag=1;
+  d->calibra_flag=1;
 }
 
 void PhoenixLineSensor_stopCalib(PhoenixLineSensor* d)
 {
-l->calibra_flag=0;
-soglia=(d->misura_max+d->misura_min)/2;
-d->misura_max=0;
-d->misura_min=0;
+  d->calibra_flag=0;
+  d->soglia=(d->misura_max+d->misura_min)/2;
+  d->misura_max=0;
+  d->misura_min=1023;
 }
 
 uint8_t PhoenixLineSensor_getStatus(PhoenixLineSensor* d)
 {
-  return d->detected->flag;
+  return d->detect_flag;
 }
 
 void PhoenixLineSensor_reset(PhoenixLineSensor* d) 
