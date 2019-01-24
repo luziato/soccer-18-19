@@ -2883,6 +2883,37 @@ MELF 0.25 W</description>
 </package3d>
 </packages3d>
 </library>
+<library name="opto-trans-siemens" urn="urn:adsk.eagle:library:317">
+<description>&lt;b&gt;Siemens Opto Transistors&lt;/b&gt;&lt;p&gt;
+&lt;author&gt;Created by librarian@cadsoft.de&lt;/author&gt;</description>
+<packages>
+<package name="BP103" urn="urn:adsk.eagle:footprint:21772/1" library_version="2">
+<description>&lt;B&gt;PHOTO TRANSISTOR&lt;/B&gt;</description>
+<wire x1="-2.7432" y1="0.4572" x2="-3.556" y2="0.4572" width="0.1524" layer="21"/>
+<wire x1="-3.556" y1="0.4572" x2="-3.556" y2="-0.4826" width="0.1524" layer="21"/>
+<wire x1="-3.556" y1="-0.4826" x2="-2.7178" y2="-0.4826" width="0.1524" layer="21"/>
+<wire x1="-1.905" y1="0" x2="0" y2="1.905" width="0.1524" layer="21" curve="-90"/>
+<wire x1="-1.27" y1="0" x2="0" y2="1.27" width="0.1524" layer="21" curve="-90"/>
+<wire x1="0" y1="-1.27" x2="1.27" y2="0" width="0.1524" layer="51" curve="90"/>
+<wire x1="0" y1="-1.905" x2="1.905" y2="0" width="0.1524" layer="51" curve="90"/>
+<circle x="0" y="-0.0254" radius="2.7686" width="0.1524" layer="21"/>
+<circle x="0" y="0" radius="2.159" width="0.1524" layer="51"/>
+<pad name="E" x="-1.016" y="-1.016" drill="0.8128" shape="octagon"/>
+<pad name="C" x="1.016" y="1.016" drill="0.8128" shape="octagon"/>
+<pad name="B" x="1.27" y="-1.27" drill="0.8128" shape="octagon"/>
+<text x="3.175" y="1.27" size="1.27" layer="25" ratio="10">&gt;NAME</text>
+<text x="3.175" y="-1.905" size="1.27" layer="27" ratio="10">&gt;VALUE</text>
+</package>
+</packages>
+<packages3d>
+<package3d name="BP103" urn="urn:adsk.eagle:package:21787/1" type="box" library_version="2">
+<description>PHOTO TRANSISTOR</description>
+<packageinstances>
+<packageinstance name="BP103"/>
+</packageinstances>
+</package3d>
+</packages3d>
+</library>
 </libraries>
 <attributes>
 </attributes>
@@ -3247,6 +3278,78 @@ design rules under a new name.</description>
 <attribute name="SPICEPREFIX" value="R" x="-203.2" y="-177.8" size="1.778" layer="27" display="off"/>
 <attribute name="VALUE" x="-193.04" y="-182.88" size="1.27" layer="27"/>
 </element>
+<element name="T1" library="opto-trans-siemens" library_urn="urn:adsk.eagle:library:317" package="BP103" package3d_urn="urn:adsk.eagle:package:21787/1" value="BP103" x="-190.5" y="-186.69" smashed="yes">
+<attribute name="MF" value="" x="-190.5" y="-186.69" size="1.778" layer="27" display="off"/>
+<attribute name="MPN" value="" x="-190.5" y="-186.69" size="1.778" layer="27" display="off"/>
+<attribute name="NAME" x="-187.325" y="-185.42" size="1.27" layer="25" ratio="10"/>
+<attribute name="OC_FARNELL" value="unknown" x="-190.5" y="-186.69" size="1.778" layer="27" display="off"/>
+<attribute name="OC_NEWARK" value="unknown" x="-190.5" y="-186.69" size="1.778" layer="27" display="off"/>
+<attribute name="VALUE" x="-187.325" y="-188.595" size="1.27" layer="27" ratio="10"/>
+</element>
+<element name="T2" library="opto-trans-siemens" library_urn="urn:adsk.eagle:library:317" package="BP103" package3d_urn="urn:adsk.eagle:package:21787/1" value="BP103" x="-190.5" y="-193.04" smashed="yes">
+<attribute name="MF" value="" x="-190.5" y="-193.04" size="1.778" layer="27" display="off"/>
+<attribute name="MPN" value="" x="-190.5" y="-193.04" size="1.778" layer="27" display="off"/>
+<attribute name="NAME" x="-187.325" y="-191.77" size="1.27" layer="25" ratio="10"/>
+<attribute name="OC_FARNELL" value="unknown" x="-190.5" y="-193.04" size="1.778" layer="27" display="off"/>
+<attribute name="OC_NEWARK" value="unknown" x="-190.5" y="-193.04" size="1.778" layer="27" display="off"/>
+<attribute name="VALUE" x="-187.325" y="-194.945" size="1.27" layer="27" ratio="10"/>
+</element>
+<element name="T3" library="opto-trans-siemens" library_urn="urn:adsk.eagle:library:317" package="BP103" package3d_urn="urn:adsk.eagle:package:21787/1" value="BP103" x="-190.5" y="-199.39" smashed="yes">
+<attribute name="MF" value="" x="-190.5" y="-199.39" size="1.778" layer="27" display="off"/>
+<attribute name="MPN" value="" x="-190.5" y="-199.39" size="1.778" layer="27" display="off"/>
+<attribute name="NAME" x="-187.325" y="-198.12" size="1.27" layer="25" ratio="10"/>
+<attribute name="OC_FARNELL" value="unknown" x="-190.5" y="-199.39" size="1.778" layer="27" display="off"/>
+<attribute name="OC_NEWARK" value="unknown" x="-190.5" y="-199.39" size="1.778" layer="27" display="off"/>
+<attribute name="VALUE" x="-187.325" y="-201.295" size="1.27" layer="27" ratio="10"/>
+</element>
+<element name="T4" library="opto-trans-siemens" library_urn="urn:adsk.eagle:library:317" package="BP103" package3d_urn="urn:adsk.eagle:package:21787/1" value="BP103" x="-190.5" y="-205.74" smashed="yes">
+<attribute name="MF" value="" x="-190.5" y="-205.74" size="1.778" layer="27" display="off"/>
+<attribute name="MPN" value="" x="-190.5" y="-205.74" size="1.778" layer="27" display="off"/>
+<attribute name="NAME" x="-187.325" y="-204.47" size="1.27" layer="25" ratio="10"/>
+<attribute name="OC_FARNELL" value="unknown" x="-190.5" y="-205.74" size="1.778" layer="27" display="off"/>
+<attribute name="OC_NEWARK" value="unknown" x="-190.5" y="-205.74" size="1.778" layer="27" display="off"/>
+<attribute name="VALUE" x="-187.325" y="-207.645" size="1.27" layer="27" ratio="10"/>
+</element>
+<element name="T5" library="opto-trans-siemens" library_urn="urn:adsk.eagle:library:317" package="BP103" package3d_urn="urn:adsk.eagle:package:21787/1" value="BP103" x="-190.5" y="-212.09" smashed="yes">
+<attribute name="MF" value="" x="-190.5" y="-212.09" size="1.778" layer="27" display="off"/>
+<attribute name="MPN" value="" x="-190.5" y="-212.09" size="1.778" layer="27" display="off"/>
+<attribute name="NAME" x="-187.325" y="-210.82" size="1.27" layer="25" ratio="10"/>
+<attribute name="OC_FARNELL" value="unknown" x="-190.5" y="-212.09" size="1.778" layer="27" display="off"/>
+<attribute name="OC_NEWARK" value="unknown" x="-190.5" y="-212.09" size="1.778" layer="27" display="off"/>
+<attribute name="VALUE" x="-187.325" y="-213.995" size="1.27" layer="27" ratio="10"/>
+</element>
+<element name="T6" library="opto-trans-siemens" library_urn="urn:adsk.eagle:library:317" package="BP103" package3d_urn="urn:adsk.eagle:package:21787/1" value="BP103" x="-190.5" y="-218.44" smashed="yes">
+<attribute name="MF" value="" x="-190.5" y="-218.44" size="1.778" layer="27" display="off"/>
+<attribute name="MPN" value="" x="-190.5" y="-218.44" size="1.778" layer="27" display="off"/>
+<attribute name="NAME" x="-187.325" y="-217.17" size="1.27" layer="25" ratio="10"/>
+<attribute name="OC_FARNELL" value="unknown" x="-190.5" y="-218.44" size="1.778" layer="27" display="off"/>
+<attribute name="OC_NEWARK" value="unknown" x="-190.5" y="-218.44" size="1.778" layer="27" display="off"/>
+<attribute name="VALUE" x="-187.325" y="-220.345" size="1.27" layer="27" ratio="10"/>
+</element>
+<element name="T7" library="opto-trans-siemens" library_urn="urn:adsk.eagle:library:317" package="BP103" package3d_urn="urn:adsk.eagle:package:21787/1" value="BP103" x="-190.5" y="-224.79" smashed="yes">
+<attribute name="MF" value="" x="-190.5" y="-224.79" size="1.778" layer="27" display="off"/>
+<attribute name="MPN" value="" x="-190.5" y="-224.79" size="1.778" layer="27" display="off"/>
+<attribute name="NAME" x="-187.325" y="-223.52" size="1.27" layer="25" ratio="10"/>
+<attribute name="OC_FARNELL" value="unknown" x="-190.5" y="-224.79" size="1.778" layer="27" display="off"/>
+<attribute name="OC_NEWARK" value="unknown" x="-190.5" y="-224.79" size="1.778" layer="27" display="off"/>
+<attribute name="VALUE" x="-187.325" y="-226.695" size="1.27" layer="27" ratio="10"/>
+</element>
+<element name="T8" library="opto-trans-siemens" library_urn="urn:adsk.eagle:library:317" package="BP103" package3d_urn="urn:adsk.eagle:package:21787/1" value="BP103" x="-190.5" y="-231.14" smashed="yes">
+<attribute name="MF" value="" x="-190.5" y="-231.14" size="1.778" layer="27" display="off"/>
+<attribute name="MPN" value="" x="-190.5" y="-231.14" size="1.778" layer="27" display="off"/>
+<attribute name="NAME" x="-187.325" y="-229.87" size="1.27" layer="25" ratio="10"/>
+<attribute name="OC_FARNELL" value="unknown" x="-190.5" y="-231.14" size="1.778" layer="27" display="off"/>
+<attribute name="OC_NEWARK" value="unknown" x="-190.5" y="-231.14" size="1.778" layer="27" display="off"/>
+<attribute name="VALUE" x="-187.325" y="-233.045" size="1.27" layer="27" ratio="10"/>
+</element>
+<element name="T9" library="opto-trans-siemens" library_urn="urn:adsk.eagle:library:317" package="BP103" package3d_urn="urn:adsk.eagle:package:21787/1" value="BP103" x="-190.5" y="-237.49" smashed="yes">
+<attribute name="MF" value="" x="-190.5" y="-237.49" size="1.778" layer="27" display="off"/>
+<attribute name="MPN" value="" x="-190.5" y="-237.49" size="1.778" layer="27" display="off"/>
+<attribute name="NAME" x="-187.325" y="-236.22" size="1.27" layer="25" ratio="10"/>
+<attribute name="OC_FARNELL" value="unknown" x="-190.5" y="-237.49" size="1.778" layer="27" display="off"/>
+<attribute name="OC_NEWARK" value="unknown" x="-190.5" y="-237.49" size="1.778" layer="27" display="off"/>
+<attribute name="VALUE" x="-187.325" y="-239.395" size="1.27" layer="27" ratio="10"/>
+</element>
 </elements>
 <signals>
 <signal name="GND">
@@ -3291,6 +3394,15 @@ design rules under a new name.</description>
 <contactref element="J6" pad="8"/>
 <contactref element="J7" pad="3"/>
 <contactref element="R22" pad="2"/>
+<contactref element="T1" pad="E"/>
+<contactref element="T2" pad="E"/>
+<contactref element="T3" pad="E"/>
+<contactref element="T4" pad="E"/>
+<contactref element="T5" pad="E"/>
+<contactref element="T6" pad="E"/>
+<contactref element="T7" pad="E"/>
+<contactref element="T8" pad="E"/>
+<contactref element="T9" pad="E"/>
 <wire x1="-34.163" y1="241.3" x2="-22.86" y2="237.49" width="0" layer="19" extent="1-1"/>
 <wire x1="-36.83" y1="237.49" x2="-34.163" y2="241.3" width="0" layer="19" extent="1-1"/>
 <wire x1="-40.513" y1="241.3" x2="-36.83" y2="237.49" width="0" layer="19" extent="1-1"/>
@@ -3329,6 +3441,15 @@ design rules under a new name.</description>
 <wire x1="-181.61" y1="-151.13" x2="-184.15" y2="-151.13" width="0" layer="19" extent="1-1"/>
 <wire x1="-178.918" y1="-173.99" x2="-181.61" y2="-151.13" width="0" layer="19" extent="1-1"/>
 <wire x1="-181.61" y1="-180.34" x2="-178.918" y2="-173.99" width="0" layer="19" extent="1-1"/>
+<wire x1="-191.516" y1="-187.706" x2="-181.61" y2="-180.34" width="0" layer="19" extent="1-1"/>
+<wire x1="-191.516" y1="-194.056" x2="-191.516" y2="-187.706" width="0" layer="19" extent="1-1"/>
+<wire x1="-191.516" y1="-200.406" x2="-191.516" y2="-194.056" width="0" layer="19" extent="1-1"/>
+<wire x1="-191.516" y1="-206.756" x2="-191.516" y2="-200.406" width="0" layer="19" extent="1-1"/>
+<wire x1="-191.516" y1="-213.106" x2="-191.516" y2="-206.756" width="0" layer="19" extent="1-1"/>
+<wire x1="-191.516" y1="-219.456" x2="-191.516" y2="-213.106" width="0" layer="19" extent="1-1"/>
+<wire x1="-191.516" y1="-225.806" x2="-191.516" y2="-219.456" width="0" layer="19" extent="1-1"/>
+<wire x1="-191.516" y1="-232.156" x2="-191.516" y2="-225.806" width="0" layer="19" extent="1-1"/>
+<wire x1="-191.516" y1="-238.506" x2="-191.516" y2="-232.156" width="0" layer="19" extent="1-1"/>
 <wire x1="-93.98" y1="-48.26" x2="-144.78" y2="-53.34" width="0" layer="19" extent="1-1"/>
 <wire x1="-91.44" y1="-48.26" x2="-93.98" y2="-48.26" width="0" layer="19" extent="1-1"/>
 </signal>
@@ -3370,9 +3491,27 @@ design rules under a new name.</description>
 <contactref element="R18" pad="2"/>
 <contactref element="R19" pad="2"/>
 <contactref element="J6" pad="2"/>
+<contactref element="T1" pad="C"/>
+<contactref element="T2" pad="C"/>
+<contactref element="T3" pad="C"/>
+<contactref element="T4" pad="C"/>
+<contactref element="T5" pad="C"/>
+<contactref element="T6" pad="C"/>
+<contactref element="T7" pad="C"/>
+<contactref element="T8" pad="C"/>
+<contactref element="T9" pad="C"/>
 <wire x1="-190.37" y1="-67.31" x2="-190.37" y2="-62.23" width="0" layer="19" extent="1-1"/>
 <wire x1="-142.24" y1="-53.34" x2="-190.37" y2="-62.23" width="0" layer="19" extent="1-1"/>
 <wire x1="-191.77" y1="-151.13" x2="-190.37" y2="-67.31" width="0" layer="19" extent="1-1"/>
+<wire x1="-189.484" y1="-185.674" x2="-191.77" y2="-151.13" width="0" layer="19" extent="1-1"/>
+<wire x1="-189.484" y1="-192.024" x2="-189.484" y2="-185.674" width="0" layer="19" extent="1-1"/>
+<wire x1="-189.484" y1="-198.374" x2="-189.484" y2="-192.024" width="0" layer="19" extent="1-1"/>
+<wire x1="-189.484" y1="-204.724" x2="-189.484" y2="-198.374" width="0" layer="19" extent="1-1"/>
+<wire x1="-189.484" y1="-211.074" x2="-189.484" y2="-204.724" width="0" layer="19" extent="1-1"/>
+<wire x1="-189.484" y1="-217.424" x2="-189.484" y2="-211.074" width="0" layer="19" extent="1-1"/>
+<wire x1="-189.484" y1="-223.774" x2="-189.484" y2="-217.424" width="0" layer="19" extent="1-1"/>
+<wire x1="-189.484" y1="-230.124" x2="-189.484" y2="-223.774" width="0" layer="19" extent="1-1"/>
+<wire x1="-189.484" y1="-236.474" x2="-189.484" y2="-230.124" width="0" layer="19" extent="1-1"/>
 <wire x1="-138.43" y1="65.405" x2="-142.24" y2="-53.34" width="0" layer="19" extent="1-1"/>
 <wire x1="-130.81" y1="184.15" x2="-138.43" y2="65.405" width="0" layer="19" extent="1-1"/>
 <wire x1="-91.44" y1="185.42" x2="-130.81" y2="184.15" width="0" layer="19" extent="1-1"/>
@@ -3516,9 +3655,6 @@ design rules under a new name.</description>
 <contactref element="R21" pad="1"/>
 <wire x1="-185.42" y1="-129.54" x2="-193.04" y2="-134.62" width="0" layer="19" extent="1-1"/>
 </signal>
-<signal name="GATE">
-<contactref element="R23" pad="2"/>
-</signal>
 <signal name="DRAIN">
 <contactref element="J7" pad="2"/>
 <contactref element="X6" pad="2"/>
@@ -3630,8 +3766,10 @@ design rules under a new name.</description>
 <contactref element="U$7" pad="INA"/>
 <wire x1="-91.44" y1="-10.16" x2="-15.24" y2="153.67" width="0" layer="19" extent="1-1"/>
 </signal>
-<signal name="N$7">
+<signal name="KICK">
 <contactref element="B2" pad="26"/>
+<contactref element="R23" pad="2"/>
+<wire x1="-93.98" y1="-12.7" x2="-190.348" y2="-180.34" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="N$22">
 <contactref element="B2" pad="27"/>
