@@ -4,6 +4,7 @@
 #include "phoenix_joints.h"
 #include "phoenix_drive.h"
 #include "phoenix_params.h"
+#include "phoenix_timer.h"
 
 PhoenixJoint joints[NUM_JOINTS] = 
 {
@@ -42,13 +43,25 @@ void setup()
     PhoenixJoint_init(&joints[i]);
   }
   PhoenixDrive_init(&drive, joints);
-    
   
+  
+  struct Timer* timer_ptr=Timer_create(100, &testTimerFn, 0);
+  Timer_start(timer_ptr);
+  Timer_init();
+}
+
+long unsigned int counter=0;
+
+void testTimerFn() {
+  Serial.println(counter);
+  counter=0;
 }
 
 void loop() 
 {
-  for(int i=0;i<3;i++)
+  
+  counter++;
+  /**for(int i=0;i<3;i++)
   {
     
     Serial.println("la i è: "+ i);
@@ -68,5 +81,5 @@ void loop()
     Serial.println("la direzione è: "+ joints[i].direzione);
     delay(1000);
   }
- 
+ **/
 }
