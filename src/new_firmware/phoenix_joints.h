@@ -3,7 +3,8 @@
 #pragma once
 #include <Arduino.h>
 
-typedef struct {
+typedef struct 
+{
   uint8_t pin_dira;
   uint8_t pin_dirb;
   uint8_t pin_pwm;
