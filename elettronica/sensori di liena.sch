@@ -1597,7 +1597,7 @@ Warning: This is the KIT version of the AXIAL-0.3 package. This package has a sm
 <variantdefs>
 </variantdefs>
 <classes>
-<class number="0" name="default" width="0.254" drill="0">
+<class number="0" name="5v" width="0.508" drill="0">
 <clearance class="0" value="0.1524"/>
 </class>
 </classes>
@@ -1663,8 +1663,8 @@ Warning: This is the KIT version of the AXIAL-0.3 package. This package has a sm
 <segment>
 <pinref part="JP1" gate="A" pin="3"/>
 <pinref part="C1" gate="G$1" pin="2"/>
-<wire x1="12.7" y1="137.16" x2="22.86" y2="137.16" width="0.1524" layer="91"/>
-<wire x1="22.86" y1="137.16" x2="27.94" y2="134.62" width="0.1524" layer="91"/>
+<wire x1="12.7" y1="137.16" x2="20.32" y2="137.16" width="0.1524" layer="91"/>
+<wire x1="20.32" y1="137.16" x2="27.94" y2="134.62" width="0.1524" layer="91"/>
 <label x="27.94" y="134.62" size="1.27" layer="95" xref="yes"/>
 </segment>
 </net>
