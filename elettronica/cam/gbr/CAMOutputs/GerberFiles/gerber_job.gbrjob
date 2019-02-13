@@ -1,0 +1,24 @@
+{
+    "Header": {
+        "Comment": "All values are metric (mm)",
+        "CreationDate": "2019-02-11T18:34:37Z",
+        "GenerationSoftware": {
+            "Application": "EAGLE",
+            "Vendor": "Autodesk",
+            "Version": "9.2.2"
+        },
+        "Part": "Single"
+    },
+    "Overall": {
+        "BoardThickness": 1.57,
+        "LayerNumber": 2,
+        "Name": {
+            "ProjectId": "main"
+        },
+        "Owner": "Matteo Luziatelli <matteo.luziatelli@gmail.com>",
+        "Size": {
+            "X": 192.995259,
+            "Y": 168.884709
+        }
+    }
+}
