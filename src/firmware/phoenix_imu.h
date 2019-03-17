@@ -13,8 +13,20 @@ typedef struct
   double heading_attuale;
   double heading_target;
   double heading_offset;
-  double errore;
-  double errore_pid;
+  double errore;//errore attuale
+  double output_pid;//il valore di correzione che mi restitusci il pid
+  double max_output;//massimo valore di outpid
+  //per il pid
+  double ki;//ERRORE INTERGRALE
+  double kp;//ERRORE PROPORZIONALE
+  double kd;//ERRORE DERIVATIVO
+
+  double errore_prec;//errore precedente
+  double dt;//delta tempo
+  double idt;//inverso delta tempo
+
+  double sum_i;//sommatoria integrale
+  int max_i;//massimo valore di sum_i
 }PhoenixImu;
 
 /**
@@ -60,3 +72,4 @@ void PhoenixImu_setOffset(PhoenixImu* m, double os);
  * Imposta heading_target pari a t
  **/
 void PhoenixImu_setTarget(PhoenixImu* m, double t);
+
