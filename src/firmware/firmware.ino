@@ -26,7 +26,8 @@
 
 struct Timer* test1;
 
-void setup() {
+void setup() 
+{
   cli();
   Serial.begin(9600);
   Serial.println("Serial initialized...");
@@ -60,8 +61,10 @@ volatile uint16_t idle_time=0;
 volatile uint8_t test_joint_fn_state=0;
 volatile uint8_t test_joint_fn_joint_idx=0;
 
-void testJointsFn() {
-  switch(test_joint_fn_state) {
+void testJointsFn() 
+{
+  switch(test_joint_fn_state) 
+  {
   case 0:
     PhoenixJoint_setSpeed(&joints[test_joint_fn_joint_idx%3], 255);
     PhoenixJoint_handle(&joints[test_joint_fn_joint_idx%3]);

@@ -10,7 +10,7 @@ void PhoenixLineSensor_init(PhoenixLineSensor* d)
   d->detect_flag=0;
   d->calibra_flag=0;
   d->misura=0;
-  d->misura_min=0;
+  d->misura_min=65535;
   d->misura_max=0;
   d->soglia=0;
 
@@ -48,7 +48,7 @@ void PhoenixLineSensor_stopCalib(PhoenixLineSensor* d)
   d->calibra_flag=0;
   d->soglia=(d->misura_max+d->misura_min)/2;
   d->misura_max=0;
-  d->misura_min=1023;
+  d->misura_min=65535;
 }
 
 uint8_t PhoenixLineSensor_getStatus(PhoenixLineSensor* d)

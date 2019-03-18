@@ -93,5 +93,29 @@ double PhoenixLineHandler_getEscapeY(PhoenixLineHandler* h)
 {
   return h->escape_y;
 }
+/**
+ * imposta calib_flag pari ad 1, e lancia la funzione 
+ * PhoenixLineSensor_startCalib per ogni sensore in line_sensors 
+ **/
+void PhoenixLineHandler_startCalib(PhoenixLineHandler* h)
+{
+  h->calib_flag=1;
+  for(int i=0;i<NUM_LINEDETECTORS;i++)
+  {
+    PhoenixLineSensor_startCalib(&h->line_sensors[i]);
+  }
+  
+}
 
-
+/**
+ * azzera calib_flag e lancia la funzione PhoenixLineSensor_stopCalib
+ * per ogni sensore in line_sensors
+ **/
+void PhoenixLineHandler_stopCalib(PhoenixLineHandler* h)
+{
+  h->calib_flag=0;
+  for(int i=0;i<NUM_LINEDETECTORS;i++)
+  {
+    PhoenixLineSensor_stopCalib(&h->line_sensors[i]);
+  }
+}

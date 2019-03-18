@@ -2,22 +2,20 @@
 /**
  * phoenix_pixy.h
  **/
-
-#pragma once
-
-#include <Pixy.h>
+#include "phoenix_pixy.h"
 
 #define BALL_SIG 1
 #define BALL_RELIABLE_CTR 5
 
-typedef struct {
-  int8_t ball_detection;
+/*typedef struct 
+{
+  uint8_t ball_detection;
   uint16_t ball_x;
   uint16_t ball_y;
   uint16_t ball_w;
   uint16_t ball_h;
 }PhoenixCamera;
-
+*/
 
 /**
  * Inizializza p (PhoenixCamera*) azzerando i valori
@@ -32,7 +30,7 @@ void PhoenixCamera_init(PhoenixCamera* p)
   p->ball_y=0;
   p->ball_w=0;
   p->ball_h=0;
-  pixy.init();
+//  p->pixy.init();
 }
 
 /**
@@ -58,6 +56,7 @@ void PhoenixCamera_init(PhoenixCamera* p)
  **/
 void PhoenixCamera_handle(PhoenixCamera* p)
 {
+  /**
   uint8_t dect_ball=0;
   p->ball_detection=0;
   int a=pixy.getBlocks();
@@ -96,7 +95,7 @@ void PhoenixCamera_handle(PhoenixCamera* p)
       p->ball_detection--;
     }
   }
-
+**/
 }
 
 /**
@@ -138,5 +137,3 @@ uint16_t PhoenixCamera_getBallH(PhoenixCamera* p)
 {
   return p->ball_h;
 }
-
-

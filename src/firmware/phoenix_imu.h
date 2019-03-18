@@ -4,7 +4,7 @@
 
 #include <Arduino.h>
 #include <Wire.h>
-#include "phoenix_bno055.h"
+#include "bno055.h"
 
 
 typedef struct 
@@ -72,4 +72,3 @@ void PhoenixImu_setOffset(PhoenixImu* m, double os);
  * Imposta heading_target pari a t
  **/
 void PhoenixImu_setTarget(PhoenixImu* m, double t);
-

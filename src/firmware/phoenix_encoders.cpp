@@ -60,7 +60,7 @@ void Encoder_init(void)
 void Encoder_sample(void)
 {
   cli();
-  (forint i=0;i<NUM_ENCODERS;i++)
+  for (int i=0;i<NUM_ENCODERS;i++)
   {
     _encoder_sampled_value[i]=_encoder_current_value[i];
   }

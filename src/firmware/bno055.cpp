@@ -1,6 +1,8 @@
-//mine
+/**
+ * bno055.cpp
+ **/
 
-#include "phoenix_bno055.h"
+#include "bno055.h"
 
 static uint8_t received_buf[8];
 #define RECV_BUF_SIZE 8
@@ -8,8 +10,7 @@ static uint8_t received_buf[8];
 /**
  * Asks for the value saved in reg
  **/
-static uint8_t read8(uint8_t addr, BNO055_reg reg) 
-{
+static uint8_t read8(uint8_t addr, BNO055_reg reg) {
   uint8_t data=0x00;
 
   // Transmission of request
@@ -22,8 +23,7 @@ static uint8_t read8(uint8_t addr, BNO055_reg reg)
   return data;  
 }
 
-static uint16_t read16(uint8_t addr, BNO055_reg reg) 
-{
+static uint16_t read16(uint8_t addr, BNO055_reg reg) {
   uint16_t msb=0;
   uint16_t lsb=0;
 
@@ -38,8 +38,7 @@ static uint16_t read16(uint8_t addr, BNO055_reg reg)
   return (lsb | msb<<8);
 }
 
-static BNO055_result readLen(uint8_t addr, BNO055_reg reg, uint8_t* buf, uint8_t len) 
-{
+static BNO055_result readLen(uint8_t addr, BNO055_reg reg, uint8_t* buf, uint8_t len) {
   Wire.beginTransmission(addr);
   Wire.write(reg);
   Wire.endTransmission();
@@ -51,16 +50,14 @@ static BNO055_result readLen(uint8_t addr, BNO055_reg reg, uint8_t* buf, uint8_t
   return SUCCESS;
 }
 
-static void write8(uint8_t addr, BNO055_reg reg, uint8_t data) 
-{
+static void write8(uint8_t addr, BNO055_reg reg, uint8_t data) {
   Wire.beginTransmission(addr);
   Wire.write(reg);
   Wire.write(data);
   Wire.endTransmission();
 }
 
-static void _BNO055_setMode(uint8_t addr, BNO055_op op) 
-{
+static void _BNO055_setMode(uint8_t addr, BNO055_op op) {
   write8(addr, OPR_MODE, op);
   delay(MODE_SWITCH_DELAY);
 }
@@ -72,8 +69,7 @@ static void _BNO055_setMode(uint8_t addr, BNO055_op op)
  * finally enable the selected operating mode
  **/
 // BNO055_result
-uint8_t BNO055_init(BNO055* b) 
-{
+uint8_t BNO055_init(BNO055* b) {
   uint8_t temp=0x00;
   // Initializes I2C (through Wire library)
   // im lazy :/
@@ -81,8 +77,7 @@ uint8_t BNO055_init(BNO055* b)
 
   uint8_t id=0;  
   id=read8(b->i2c_addr, CHIP_ID);
-  if(id!=BNO055_CHIP_ID) 
-  {
+  if(id!=BNO055_CHIP_ID) {
     // wait for boot
     delay(1000);
     id=read8(b->i2c_addr, CHIP_ID);
@@ -113,8 +108,7 @@ uint8_t BNO055_init(BNO055* b)
 }
 
 
-static void _BNO055_getHeading(BNO055* b, uint8_t* buf) 
-{
+static void _BNO055_getHeading(BNO055* b, uint8_t* buf) {
   readLen(b->i2c_addr, EUL_HEADING_LSB, buf, 6);
 
   int16_t d1 = ((int16_t)(buf[0]) | (int16_t)(buf[1])<<8);
@@ -135,8 +129,7 @@ static void _BNO055_getHeading(BNO055* b, uint8_t* buf)
  * Depending on the op selected, executes and 
  * gets data from the Device
  **/
-void BNO055_handle(BNO055* b) 
-{
+void BNO055_handle(BNO055* b) {
   _BNO055_getHeading(b, received_buf);  
   return;
 }

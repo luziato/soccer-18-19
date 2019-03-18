@@ -11,8 +11,8 @@
 
 #pragma once
 
-#include <Pixy.h>
-
+#include "phoenix_pixy.h"
+#include <Arduino.h>
 #define BALL_SIG 1
 #define BALL_RELIABLE_CTR 5
 
@@ -80,5 +80,3 @@ uint16_t PhoenixCamera_getBallW(PhoenixCamera* p);
  * Restituisce il valore ball_h
  **/
 uint16_t PhoenixCamera_getBallH(PhoenixCamera* p);
-
-

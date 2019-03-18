@@ -9,7 +9,7 @@
 #include "phoenix_drive.h"
 #include "phoenix_line.h"
 #include "phoenix_line_internals.h"
-#include "phoenix_bno055.h"
+#include "bno055.h"
 #include "phoenix_imu.h"
 
 extern PhoenixJoint joints[NUM_JOINTS];

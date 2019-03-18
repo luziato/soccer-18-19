@@ -18,7 +18,7 @@ uint8_t PhoenixImu_init(PhoenixImu* m)
   m->heading_target=0;
   m->heading_offset=0;
   m->errore=0;
-  m->errore_pid=0;
+  m->errore_prec=0;
   m->imu->i2c_addr=BNO055_I2C_ADDR;
   m->imu->op=NDOF;
   if(!BNO055_init(m->imu))
@@ -95,7 +95,7 @@ void PhoenixImu_handle(PhoenixImu* m)
  
   m->output_pid=e_p+e_d+m->sum_i;
  // dobbiamo limitare l'output
-  m->output_pid=clamp(m->output_pid,m->max_output)
+  m->output_pid=clamp(m->output_pid,m->max_output);
 
   m->errore_prec=m->errore;
 }
@@ -115,4 +115,3 @@ void PhoenixImu_setTarget(PhoenixImu* m, double t)
 {
   m->heading_target=t;//settiamo l'heading target a dove voglio andare a finire
 }
-

@@ -1,4 +1,3 @@
-//mine
 /**
  * bno055.h
  * Built by Emanuele Giacomini
@@ -177,8 +176,7 @@ typedef enum {
   UNKNOWN_DEVICE=-0x01
 }BNO055_result;
 
-typedef struct 
-{
+typedef struct {
   uint16_t timestamp;
   // i2c address (default is 0x27)
   uint8_t i2c_addr;
