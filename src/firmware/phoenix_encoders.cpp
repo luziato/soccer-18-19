@@ -60,7 +60,10 @@ void Encoder_init(void)
 void Encoder_sample(void)
 {
   cli();
-   _encoder_sampled_value=_encoder_current_value;
+  (forint i=0;i<NUM_ENCODERS;i++)
+  {
+    _encoder_sampled_value[i]=_encoder_current_value[i];
+  }
   sei();
 }
 
@@ -130,22 +133,21 @@ static const int8_t _transition_table []=
 ISR(PCINT2_vect)
 {
   cli();
-  uint8_t port_value=ENCODER_MASK;
-  register uint8_t c_value=0;
+  uint8_t port_value=PINK&ENCODER_MASK;//prendo PINK e controllo solo i valori dell'encoder
+  register uint8_t c_value=port_value;
   register uint8_t prev_value=_encoder_prev;
   register const int8_t* ttable=_transition_table;
   register int16_t* curr_enc=_encoder_current_value;
   for(uint8_t i=0;i<NUM_ENCODERS;++i)
   {
-    curr_value=curr_value+ttable[&c_value|&prev_value];
+    uint8_t table_idx = c_value&0x03|(prev_value&0x03)<<2;
+    //prendo in considerazione solo gli ultimi due numeri di curr_value
+    //faccio or congli ultimi due valori con  di prev_value
+    *curr_enc+=ttable[table_idx];
     c_value>>=2;
     prev_value>>=2;
-    _encoder_prev=port_value;
-    // build the following data:
-    // first 2 bits of prev_value | first 2 bits of c_value
-    /*
-      ? uint8_t table_idx=0;
-    */
+    ++curr_enc;
   }
+  _encoder_prev=port_value;
   sei();
 }
