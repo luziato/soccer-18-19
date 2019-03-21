@@ -4,25 +4,33 @@
 
 #include "phoenix_globals.h"
 
-PhoenixJoint joints[NUM_JOINTS] = {
-  {// Joint 0
+PhoenixJoint joints[NUM_JOINTS] = 
+{
+  //senso orario
+  //destra: joint 0  
+  //dietro: joint 1
+  //sinistra: joint 2
+  {
+  // Joint 0 
   pin_dira : 22,
-  pin_dirb : 23,
-  pin_pwm : 6,
-  direzione : 0,
-  velocita : 0
-  },
-  {// Joint 1
-  pin_dira : 24,
-  pin_dirb : 25,
-  pin_pwm : 7,
-  direzione : 0,
-  velocita : 0
-  },
-  {// Joint 2
-  pin_dira : 26,
   pin_dirb : 27,
-  pin_pwm : 8,
+  pin_pwm : 2,
+  direzione : 0,
+  velocita : 0
+  },
+  {
+  // Joint 1 
+  pin_dira : 23,
+  pin_dirb : 28,
+  pin_pwm : 3,
+  direzione : 0,
+  velocita : 0
+  },
+  {
+  // Joint 2 
+  pin_dira : 24,
+  pin_dirb : 29,
+  pin_pwm : 4,
   direzione : 0,
   velocita : 0
   }

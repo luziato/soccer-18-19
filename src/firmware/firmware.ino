@@ -94,7 +94,8 @@ void loop()
 {
   idle_time++;
   Serial.println("sono nel loop");
-  PhoenixDrive_setSpeed(&drive, 0, 1, 0);
+  PhoenixDrive_setSpeed(&drive, 1, 0, 0);
+  //(motore,x,y,rotazione)
   //il primo valore è la y
   //il secondo è la rotazione
   //il terzo è la x
