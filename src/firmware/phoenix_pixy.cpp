@@ -3,10 +3,11 @@
  * phoenix_pixy.h
  **/
 #include "phoenix_pixy.h"
-
+#include <Arduino.h>
+#include <Pixy2.h>
 #define BALL_SIG 1
 #define BALL_RELIABLE_CTR 5
-
+Pixy2 _pixy;
 /*typedef struct 
 {
   uint8_t ball_detection;
@@ -30,7 +31,7 @@ void PhoenixCamera_init(PhoenixCamera* p)
   p->ball_y=0;
   p->ball_w=0;
   p->ball_h=0;
-//  p->pixy.init();
+  _pixy.init();
 }
 
 /**
@@ -56,15 +57,16 @@ void PhoenixCamera_init(PhoenixCamera* p)
  **/
 void PhoenixCamera_handle(PhoenixCamera* p)
 {
-  /**
+  
   uint8_t dect_ball=0;
   p->ball_detection=0;
-  int a=pixy.getBlocks();
+  int a=_pixy.ccc.getBlocks();
   if(a>1)
   {
-    for(int int=0;i<a;i++)
+    for(int i=0;i<a;i++)
     {
-      if(pixy.getBlocks[i].signature==BALL_SIG)
+    
+      if(_pixy.ccc.blocks[i].m_signature==BALL_SIG)
       {
         
         if(p->ball_detection<BALL_RELIABLE_CTR)
@@ -73,11 +75,12 @@ void PhoenixCamera_handle(PhoenixCamera* p)
          
         }
        
-        p->ball_h=pixy.blocks[i].height;
-        p->ball_w=pixy.blocks[i].width;
-        p->ball_x=pixy.blocks[i].x;
-        p->ball_y=pixy.blocks[i].y;
+        p->ball_h=_pixy.ccc.blocks[i].m_height;
+        p->ball_w=_pixy.ccc.blocks[i].m_width;
+        p->ball_x=_pixy.ccc.blocks[i].m_x;
+        p->ball_y=_pixy.ccc.blocks[i].m_y;
         dect_ball=1;
+      
       }
     }
     if(dect_ball==0)
@@ -95,7 +98,7 @@ void PhoenixCamera_handle(PhoenixCamera* p)
       p->ball_detection--;
     }
   }
-**/
+
 }
 
 /**

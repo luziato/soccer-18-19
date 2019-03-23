@@ -7,22 +7,22 @@
 PhoenixJoint joints[NUM_JOINTS] = 
 {
   //senso orario
-  //destra: joint 0  
-  //dietro: joint 1
-  //sinistra: joint 2
+  //dietro: joint 0  
+  //sinistra: joint 1
+  //destra: joint 2
   {
   // Joint 0 
-  pin_dira : 22,
-  pin_dirb : 27,
-  pin_pwm : 2,
+  pin_dira : 23,
+  pin_dirb : 28,
+  pin_pwm : 3,
   direzione : 0,
   velocita : 0
   },
   {
   // Joint 1 
-  pin_dira : 23,
-  pin_dirb : 28,
-  pin_pwm : 3,
+  pin_dira : 22,
+  pin_dirb : 27,
+  pin_pwm : 2,
   direzione : 0,
   velocita : 0
   },
