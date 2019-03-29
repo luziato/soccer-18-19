@@ -1,7 +1,8 @@
 //mine
 
 #include "phoenix_imu.h"
-
+#include "utils.h"
+#include <Arduino.h>
 /**
  * Inizializza la struttura m (PhoenixImu*) tramite la seguente procedura:
  * azzera heading_attuale, heading_target, heading_offset, errore, errore_pid
@@ -53,25 +54,17 @@ uint8_t PhoenixImu_init(PhoenixImu* m)
  * è più conveniente chiamarla solo ogni 10mS attraverso
  * un timer ? :) Nella prossima puntata...
  **/
-double clamp(double v, double m)
-{
- if(v>m)//se supera il massimo ritorna il massimo
- {
-   return m;
- }
- if(v<-m)
- {
-   return -m;
- }
- return v;
-}
+
 void PhoenixImu_handle(PhoenixImu* m) 
 {
   BNO055_handle(m->imu);
   //m->imu->BNO055_handle();
   m->heading_attuale=m->imu->eul_heading;  
   m->errore=m->heading_target-(m->heading_attuale-m->heading_offset);
- 
+  //m->heading_attuale = cconstraint(m->errore,180,-180);
+  m->errore = cconstraint(m->errore,180,-180);
+  //constain serve a limitare i gradi fino a 180 e -180 pittosto che lasciare i gradi a 360
+  
   //PID
   //ERRORE PROPORZIONALE
   //quanto è grande l'errore
@@ -99,6 +92,27 @@ void PhoenixImu_handle(PhoenixImu* m)
 
   m->errore_prec=m->errore;
 }
+
+void PhoenixImu_print(PhoenixImu*m)
+{
+  Serial.print("[attuale= ");
+  Serial.print(m->heading_attuale);
+  Serial.print("\t");  
+  Serial.print("target= ");
+  Serial.print(m->heading_target);
+  Serial.print("\t");  
+  Serial.print("offset= ");
+  Serial.print(m->heading_offset);
+  Serial.print("\t");  
+  Serial.print("output pid= ");
+  Serial.print(m->output_pid);
+  Serial.print("\t");  
+  Serial.print("errore= ");
+  Serial.print(m->errore);
+  Serial.print("]");
+  Serial.println();
+}
+
 
 /**
  * Imposta heading_offset pari ad os

@@ -11,9 +11,17 @@
  **/
 static double kmatrix[NUM_JOINTS][NUM_JOINTS] =
 {
+  //matirce STEORA
+  /*
   {1.0, -0.5, -0.5},
-  {0.0, -0.86, 0.86},
+  {0.0, 0.86, -0.86},
   {1.0, 1.0, 1.0}
+  */
+  //matrice YATILI
+  {1.0, -0.5, -0.5},
+  {0.0, 0.86, -0.86},
+  {1.0, 1.0, 1.0}
+
 };
 
 /**
@@ -22,9 +30,16 @@ static double kmatrix[NUM_JOINTS][NUM_JOINTS] =
  **/
 static double ikmatrix[NUM_JOINTS][NUM_JOINTS] =
 {
-    {0.66, 0.0, 0.33},
-    {-0.33, -0.58, 0.33},
-    {-0.33, 0.58, 0.33}
+    //matrice inversa STEORA
+    /*
+    {0.6,	0, 0.33},
+    {-0.33, 0.58, 0.33},
+    {-0.33, -0.58, 0.33}
+    */
+    //matrice inversa YATILI
+    {0.6,	0, 0.33},
+    {-0.33, 0.58, 0.33},
+    {-0.33, -0.58, 0.33}
 };
 
 /**
@@ -57,7 +72,6 @@ void PhoenixDrive_setSpeed(PhoenixDrive* d, double x, double y, double r)
  **/
 void PhoenixDrive_handle(PhoenixDrive* d) 
 {
-  double speed=0;
   double comp_vec[3] = {d->vel_x,d->vel_y,d->rot};
   
 
@@ -66,7 +80,7 @@ void PhoenixDrive_handle(PhoenixDrive* d)
     double speed=0;
     for(int j=0;j<NUM_JOINTS;j++)
     {
-      speed=speed+ikmatrix[r][j]*comp_vec[j];
+      speed+=ikmatrix[r][j]*comp_vec[j];
       //calcola la velocità di joints->speed la matrice con la matrice in alto e il vettore {rot, x, y}
     }
     PhoenixJoint_setSpeed(&d->joints[r],speed*255);

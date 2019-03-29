@@ -10,11 +10,9 @@
  **/
 
 #pragma once
-
-#include "phoenix_pixy.h"
 #include <Arduino.h>
 #define BALL_SIG 1
-#define BALL_RELIABLE_CTR 5
+#define BALL_RELIABLE_AGE 5
 
 typedef struct {
   int8_t ball_detection;
@@ -22,6 +20,18 @@ typedef struct {
   uint16_t ball_y;
   uint16_t ball_w;
   uint16_t ball_h;
+  //per il pid
+  double ki;//ERRORE INTERGRALE
+  double kp;//ERRORE PROPORZIONALE
+  double kd;//ERRORE DERIVATIVO
+  double output_pid;
+  double max_output;
+  double errore;
+  double errore_prec;
+  double dt;
+  double idt;
+  double sum_i;
+  int max_i;
 }PhoenixCamera;
 
 
@@ -80,3 +90,5 @@ uint16_t PhoenixCamera_getBallW(PhoenixCamera* p);
  * Restituisce il valore ball_h
  **/
 uint16_t PhoenixCamera_getBallH(PhoenixCamera* p);
+
+void PhoenixCamera_print(PhoenixCamera*p);

@@ -64,4 +64,8 @@ void PhoenixJoint_handle(PhoenixJoint* j)
   digitalWrite(j->pin_dira, j->direzione);
   digitalWrite(j->pin_dirb, !j->direzione);
   analogWrite(j->pin_pwm, j->velocita);
+  if(j->velocita<50)
+  {
+    analogWrite(j->pin_pwm,0);
+  }
 }

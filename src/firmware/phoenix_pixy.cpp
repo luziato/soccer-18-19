@@ -3,6 +3,7 @@
  * phoenix_pixy.h
  **/
 #include "phoenix_pixy.h"
+#include "utils.h"
 #include <Arduino.h>
 #include <Pixy2.h>
 #define BALL_SIG 1
@@ -26,12 +27,13 @@ Pixy2 _pixy;
  **/
 void PhoenixCamera_init(PhoenixCamera* p)
 {
+  _pixy.init();
   p->ball_detection=0;
   p->ball_x=0;
   p->ball_y=0;
   p->ball_w=0;
   p->ball_h=0;
-  _pixy.init();
+  return;
 }
 
 /**
@@ -57,48 +59,42 @@ void PhoenixCamera_init(PhoenixCamera* p)
  **/
 void PhoenixCamera_handle(PhoenixCamera* p)
 {
-  
-  uint8_t dect_ball=0;
   p->ball_detection=0;
   int a=_pixy.ccc.getBlocks();
-  if(a>1)
-  {
     for(int i=0;i<a;i++)
     {
     
       if(_pixy.ccc.blocks[i].m_signature==BALL_SIG)
       {
-        
-        if(p->ball_detection<BALL_RELIABLE_CTR)
+        if(_pixy.ccc.blocks[i].m_age>BALL_RELIABLE_AGE)
         {
-          p->ball_detection++;
-         
-        }
-       
-        p->ball_h=_pixy.ccc.blocks[i].m_height;
-        p->ball_w=_pixy.ccc.blocks[i].m_width;
-        p->ball_x=_pixy.ccc.blocks[i].m_x;
-        p->ball_y=_pixy.ccc.blocks[i].m_y;
-        dect_ball=1;
-      
+          p->ball_detection=1;
+          p->ball_h=_pixy.ccc.blocks[i].m_height;
+          p->ball_w=_pixy.ccc.blocks[i].m_width;
+          p->ball_x=_pixy.ccc.blocks[i].m_x;
+          p->ball_y=_pixy.ccc.blocks[i].m_y;
+
+          p->errore=((int)p->ball_x-160);
+          p->errore = cconstraint(p->errore,180,-180);
+          //ERRORE PROPORZIONALE
+          //quanto è grande l'errore
+          double e_p=p->errore*p->kp;
+          //ERRORE DERIVATIVO
+          // calcola l'errore nel tempo
+          double e_d=((p->errore-p->errore_prec)*p->idt)*p->kd;
+          //ERRORE INTERGRALE
+          //errori che aumentano nel tempo
+          p->sum_i+=p->ki*p->errore*p->dt;
+
+          p->sum_i=clamp(p->sum_i,p->max_i);
+          p->output_pid=e_p+e_d+p->sum_i;
+          // dobbiamo limitare l'output
+          p->output_pid=clamp(p->output_pid,p->max_output);
+
+          p->errore_prec=p->errore;
+        }      
       }
     }
-    if(dect_ball==0)
-    {
-       if(p->ball_detection>0)
-        {
-          p->ball_detection--;
-        }
-    }
-  }
-  else
-  {
-    if(p->ball_detection>0)
-    {
-      p->ball_detection--;
-    }
-  }
-
 }
 
 /**
@@ -139,4 +135,18 @@ uint16_t PhoenixCamera_getBallW(PhoenixCamera* p)
 uint16_t PhoenixCamera_getBallH(PhoenixCamera* p)
 {
   return p->ball_h;
+}
+
+void PhoenixCamera_print(PhoenixCamera*p)
+{
+  Serial.print("[x attuale= ");
+  Serial.print(p->ball_x);
+  Serial.print("\t");
+  Serial.print("output pid= ");
+  Serial.print(p->output_pid);
+  Serial.print("\t");  
+  Serial.print("errore= ");
+  Serial.print(p->errore);
+  Serial.print("]");
+  Serial.println();
 }

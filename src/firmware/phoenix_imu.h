@@ -10,9 +10,9 @@
 typedef struct 
 {
   BNO055* imu;
-  double heading_attuale;
-  double heading_target;
-  double heading_offset;
+  double heading_attuale;//attuale
+  double heading_target;//obbiettivo
+  double heading_offset;//differenza rispetto ad un valore di riferimento
   double errore;//errore attuale
   double output_pid;//il valore di correzione che mi restitusci il pid
   double max_output;//massimo valore di outpid
@@ -72,3 +72,4 @@ void PhoenixImu_setOffset(PhoenixImu* m, double os);
  * Imposta heading_target pari a t
  **/
 void PhoenixImu_setTarget(PhoenixImu* m, double t);
+void PhoenixImu_print(PhoenixImu*m);

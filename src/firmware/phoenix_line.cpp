@@ -2,7 +2,7 @@
 #include "phoenix_line.h"
 #include "phoenix_line_internals.h"
 #include<math.h>
-#define NUM_LINEDETECTORS 16
+#define NUM_LINEDETECTORS 6
 // Funzioni utili per lavorare con la maschera.
 //mask_read ti dice se il bit in posizione index è 0 o 1
 uint8_t mask_read(uint16_t* mask, uint8_t index) 
