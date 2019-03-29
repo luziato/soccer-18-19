@@ -3,6 +3,7 @@
 //PINK
 //K
 #include "phoenix_encoders.h"
+#include <stdint.h>
 #include <avr/io.h>
 #include <avr/interrupt.h>
 

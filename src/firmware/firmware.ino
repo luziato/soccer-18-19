@@ -24,6 +24,7 @@
 #include "phoenix_imu.h"
 #include "phoenix_timer.h"
 #include "phoenix_pixy.h"
+#include "phoenix_eeprom.h"
 #include "utils.h"
 struct Timer* test1;
 void setup() 
@@ -74,6 +75,8 @@ void setup()
   //pixy
   PhoenixCamera_init(&camera);
   Serial.println("Pixy initialized...");
+  //eeprom
+  PhoenixEeprom_init();
   sei();
 }
 

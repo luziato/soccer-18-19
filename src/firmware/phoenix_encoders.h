@@ -2,7 +2,7 @@
 
 #pragma once
 #include <stdint.h>
-
+#include <avr/interrupt.h>
 // Number of encoders
 #define NUM_ENCODERS 3
 

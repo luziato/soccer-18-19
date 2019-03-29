@@ -45,20 +45,72 @@ PhoenixDrive drive;
 
 PhoenixLineSensor line_sensors[NUM_LINE_SENSORS] = 
 {
-  {
-    x : 0,
-    y : 0,
-    //pos rispetto alla circonferenza
-    // tutto a destra x1;y0
-    // sen y e cos per x
-    soglia : 0,
-    misura : 0,
-    misura_min : 0,
-    misura_max : 0,
-    detect_flag : 0,
-    calibra_flag : 0,
-    pin_reading: 0
+  {// Sensore 0
+  x : 0,
+  y : 0,
+  soglia : 0,
+  misura : 0,
+  misura_min : 0,
+  misura_max : 0,
+  detect_flag : 0,
+  calibra_flag : 0,
+  pin_reading: 0
+  },
+  {// Sensore 1
+  x : 0,
+  y : 0,
+  soglia : 0,
+  misura : 0,
+  misura_min : 0,
+  misura_max : 0,
+  detect_flag : 0,
+  calibra_flag : 0,
+  pin_reading: 0
+  },
+  {// Sensore 2
+  x : 0,
+  y : 0,
+  soglia : 0,
+  misura : 0,
+  misura_min : 0,
+  misura_max : 0,
+  detect_flag : 0,
+  calibra_flag : 0,
+  pin_reading: 0
+  },
+  {// Sensore 3
+  x : 0,
+  y : 0,
+  soglia : 0,
+  misura : 0,
+  misura_min : 0,
+  misura_max : 0,
+  detect_flag : 0,
+  calibra_flag : 0,
+  pin_reading: 0
+  },
+  {// Sensore 4
+  x : 0,
+  y : 0,
+  soglia : 0,
+  misura : 0,
+  misura_min : 0,
+  misura_max : 0,
+  detect_flag : 0,
+  calibra_flag : 0,
+  pin_reading: 0
   }
+  {// Sensore 5
+  x : 0,
+  y : 0,
+  soglia : 0,
+  misura : 0,
+  misura_min : 0,
+  misura_max : 0,
+  detect_flag : 0,
+  calibra_flag : 0,
+  pin_reading: 0
+  }    
   
 };
 PhoenixLineHandler line_handler;
@@ -151,27 +203,77 @@ PhoenixJoint joints[NUM_JOINTS] =
   velocita : 0
   }
 };
-
-
 PhoenixDrive drive;
 
+  
 PhoenixLineSensor line_sensors[NUM_LINE_SENSORS] = 
 {
-  {
-    x : 0,
-    y : 0,
-    //pos rispetto alla circonferenza
-    // tutto a destra x1;y0
-    // sen y e cos per x
-    soglia : 0,
-    misura : 0,
-    misura_min : 0,
-    misura_max : 0,
-    detect_flag : 0,
-    calibra_flag : 0,
-    pin_reading: 0
-  }
-  
+  {// Sensore 0
+  x : 0,
+  y : 0,
+  soglia : 0,
+  misura : 0,
+  misura_min : 0,
+  misura_max : 0,
+  detect_flag : 0,
+  calibra_flag : 0,
+  pin_reading: 0
+  },
+  {// Sensore 1
+  x : 0,
+  y : 0,
+  soglia : 0,
+  misura : 0,
+  misura_min : 0,
+  misura_max : 0,
+  detect_flag : 0,
+  calibra_flag : 0,
+  pin_reading: 0
+  },
+  {// Sensore 2
+  x : 0,
+  y : 0,
+  soglia : 0,
+  misura : 0,
+  misura_min : 0,
+  misura_max : 0,
+  detect_flag : 0,
+  calibra_flag : 0,
+  pin_reading: 0
+  },
+  {// Sensore 3
+  x : 0,
+  y : 0,
+  soglia : 0,
+  misura : 0,
+  misura_min : 0,
+  misura_max : 0,
+  detect_flag : 0,
+  calibra_flag : 0,
+  pin_reading: 0
+  },
+  {// Sensore 4
+  x : 0,
+  y : 0,
+  soglia : 0,
+  misura : 0,
+  misura_min : 0,
+  misura_max : 0,
+  detect_flag : 0,
+  calibra_flag : 0,
+  pin_reading: 0
+  },
+  {// Sensore 5
+  x : 0,
+  y : 0,
+  soglia : 0,
+  misura : 0,
+  misura_min : 0,
+  misura_max : 0,
+  detect_flag : 0,
+  calibra_flag : 0,
+  pin_reading: 0
+  } 
 };
 PhoenixLineHandler line_handler;
 
