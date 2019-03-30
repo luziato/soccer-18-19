@@ -39,79 +39,76 @@ PhoenixJoint joints[NUM_JOINTS] =
   velocita : 0
   }
 };
-
-
 PhoenixDrive drive;
 
 PhoenixLineSensor line_sensors[NUM_LINE_SENSORS] = 
 {
   {// Sensore 0
-  x : 0,
-  y : 0,
+  x : 0.866,
+  y : 0.5,
   soglia : 0,
   misura : 0,
-  misura_min : 0,
+  misura_min : 65535,
   misura_max : 0,
   detect_flag : 0,
   calibra_flag : 0,
   pin_reading: 0
   },
   {// Sensore 1
-  x : 0,
-  y : 0,
+  x : -0.262,
+  y : 0.965,
   soglia : 0,
   misura : 0,
-  misura_min : 0,
+  misura_min : 65535,
   misura_max : 0,
   detect_flag : 0,
   calibra_flag : 0,
   pin_reading: 0
   },
   {// Sensore 2
-  x : 0,
-  y : 0,
+  x : -0.709,
+  y : -0.960,
   soglia : 0,
   misura : 0,
-  misura_min : 0,
+  misura_min : 65535,
   misura_max : 0,
   detect_flag : 0,
   calibra_flag : 0,
   pin_reading: 0
   },
   {// Sensore 3
-  x : 0,
-  y : 0,
+  x : -0.704,
+  y : -0.709,
   soglia : 0,
   misura : 0,
-  misura_min : 0,
+  misura_min : 65535,
   misura_max : 0,
   detect_flag : 0,
   calibra_flag : 0,
   pin_reading: 0
   },
   {// Sensore 4
-  x : 0,
-  y : 0,
+  x : -0.255,
+  y : -0.966,
   soglia : 0,
   misura : 0,
-  misura_min : 0,
+  misura_min : 65535,
   misura_max : 0,
   detect_flag : 0,
   calibra_flag : 0,
   pin_reading: 0
-  }
+  },
   {// Sensore 5
-  x : 0,
-  y : 0,
+  x : -0.866,
+  y : -0.5,
   soglia : 0,
   misura : 0,
-  misura_min : 0,
+  misura_min : 65535,
   misura_max : 0,
   detect_flag : 0,
   calibra_flag : 0,
   pin_reading: 0
-  }    
-  
+  } 
 };
 PhoenixLineHandler line_handler;
 
@@ -209,66 +206,66 @@ PhoenixDrive drive;
 PhoenixLineSensor line_sensors[NUM_LINE_SENSORS] = 
 {
   {// Sensore 0
-  x : 0,
-  y : 0,
+  x : 0.866,
+  y : 0.5,
   soglia : 0,
   misura : 0,
-  misura_min : 0,
+  misura_min : 65535,
   misura_max : 0,
   detect_flag : 0,
   calibra_flag : 0,
   pin_reading: 0
   },
   {// Sensore 1
-  x : 0,
-  y : 0,
+  x : -0.262,
+  y : 0.965,
   soglia : 0,
   misura : 0,
-  misura_min : 0,
+  misura_min : 65535,
   misura_max : 0,
   detect_flag : 0,
   calibra_flag : 0,
   pin_reading: 0
   },
   {// Sensore 2
-  x : 0,
-  y : 0,
+  x : -0.709,
+  y : -0.960,
   soglia : 0,
   misura : 0,
-  misura_min : 0,
+  misura_min : 65535,
   misura_max : 0,
   detect_flag : 0,
   calibra_flag : 0,
   pin_reading: 0
   },
   {// Sensore 3
-  x : 0,
-  y : 0,
+  x : -0.704,
+  y : -0.709,
   soglia : 0,
   misura : 0,
-  misura_min : 0,
+  misura_min : 65535,
   misura_max : 0,
   detect_flag : 0,
   calibra_flag : 0,
   pin_reading: 0
   },
   {// Sensore 4
-  x : 0,
-  y : 0,
+  x : -0.255,
+  y : -0.966,
   soglia : 0,
   misura : 0,
-  misura_min : 0,
+  misura_min : 65535,
   misura_max : 0,
   detect_flag : 0,
   calibra_flag : 0,
   pin_reading: 0
   },
   {// Sensore 5
-  x : 0,
-  y : 0,
+  x : -0.866,
+  y : -0.5,
   soglia : 0,
   misura : 0,
-  misura_min : 0,
+  misura_min : 65535,
   misura_max : 0,
   detect_flag : 0,
   calibra_flag : 0,
