@@ -4,7 +4,7 @@ int val=0;
 void setup() 
 {
   pinMode(pin,INPUT);
-  Serial.begin(6900);
+  Serial.begin(9600);
 }
 
 void loop() 

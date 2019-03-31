@@ -142,6 +142,15 @@ void PhoenixCamera_print(PhoenixCamera*p)
   Serial.print("[x attuale= ");
   Serial.print(p->ball_x);
   Serial.print("\t");
+  Serial.print("y attuale= ");
+  Serial.print(p->ball_y);
+  Serial.print("\t");
+  Serial.print("height attuale= ");
+  Serial.print(p->ball_h);
+  Serial.print("\t");
+  Serial.print("width attuale= ");
+  Serial.print(p->ball_w);
+  Serial.print("\t");
   Serial.print("output pid= ");
   Serial.print(p->output_pid);
   Serial.print("\t");  
