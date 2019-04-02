@@ -4,7 +4,7 @@
 #include "phoenix_line_internals.h"
 
 
-#define ESCAPE_TTL 2000
+#define ESCAPE_TTL 5
 
 uint8_t mask_read(uint16_t* mask, uint8_t index);
 void mask_setBit(uint16_t* mask, uint8_t index);

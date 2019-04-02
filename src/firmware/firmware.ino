@@ -27,7 +27,14 @@
 #include "phoenix_eeprom.h"
 #include "utils.h"
 struct Timer* test1;
-bool cal=true;
+bool cal=false;
+double x=0;
+double y=0;
+double t=0;
+double x_prec=0;
+double y_prec=0;
+double time;//tempo in cui è stata vista l'ultima volta la palla
+bool imu_flag;//controlla se la imu è inizializzata
 //funzione caliba
 /*
 e start calib
@@ -100,10 +107,12 @@ void setup()
     Serial.println("IMU initialized...");
     PhoenixImu_handle(&imu);
     PhoenixImu_setOffset(&imu,imu.heading_attuale);
+    imu_flag=true;
    }
    else
    {
      Serial.println("IMU insn't initialized...");
+     imu_flag=false;
    }
 
   //pixy
@@ -122,8 +131,9 @@ void setup()
  }
  else
  {
-   calibrazioneOFF();
    Serial.println("Prendo i dati dalla eeprom");
+   calibrazioneOFF();
+   Serial.println("fatto");
  }
   sei();
 }
@@ -208,9 +218,7 @@ void SteoraPlayFn()
   //se vedo la palla mi allineo 
   //altrimenti torno indietro verso la porta
   //se sono allineato allora tiro avanti
-  double x=0;
-  double y=0;
-  double t=0;
+
 //handle
 PhoenixCamera_handle(&camera);
 PhoenixImu_handle(&imu);
@@ -240,11 +248,7 @@ void YatiliPlayFn()
   //se vedo la palla mi allineo 
   //altrimenti torno indietro verso la porta
   //se sono allineato allora tiro avanti
-  double x=0;
-  double y=0;
-  double t=0;
-  int y_prec=0;
-  double time;//tempo in cui è stata vista l'ultima volta la palla
+  
 //handle
 PhoenixCamera_handle(&camera);
 PhoenixImu_handle(&imu);
@@ -256,7 +260,7 @@ if(PhoenixCamera_getBallStatus(&camera)==1)
   t=-camera.output_pid/180;
   if(abs(x)<0.5)
   {
-    y=1;
+    y=0.75;
   }
   y_prec=camera.ball_y;//ultima ball_y rilevata
 }
@@ -270,13 +274,13 @@ else if((millis()-time)<(5500))
  //più la palletta si allontana più y è piccolo
  if(y_prec<180)
  {
-  y=1;
+  y=0.75;
  }
 }
 else
 {
   t=-imu.output_pid/180;
-  y=-0.5;
+  y=-0.75;
 }
 
 PhoenixDrive_setSpeed(&drive, x, y, t);
@@ -284,19 +288,13 @@ PhoenixDrive_handle(&drive);
 }
 void fnFollowBall()
 {
-  double x=0;
-  double y=0;
-  double t=0;
-  int x_prec=0;
-  int y_prec=0;
-  double time;//tempo in cui è stata vista l'ultima volta la palla
   PhoenixCamera_handle(&camera);
-  PhoenixImu_handle(&imu);
+  //PhoenixImu_handle(&imu);
  if(PhoenixCamera_getBallStatus(&camera)==1)
   {
     t=millis();
     //traiettoria
-    x=-sin(degToRad(imu.errore));
+    x=0;
     //y=1-cos(degToRad(imu.errore));
     t=-camera.output_pid/180;
     if(abs(x)<0.5)
@@ -313,14 +311,14 @@ void fnFollowBall()
     {
       t=1;
       //se la x precedente è positivo si gira verso destra
-      x=1;
+      //x=1;
       //nel caso del potriere si deve spostare verso destra
     }
     if(x_prec<-0.5)
     {
       t=-1;
       //se la x precedente è negativa si gira verso sinistra
-      x=-1;
+      //x=-1;
       //nel caso del portiere si deve spostare verso sinistra
     }
 
@@ -347,39 +345,63 @@ void fnFollowBall()
 
 }
 
+void ball()
+{
+  if(PhoenixCamera_getBallStatus(&camera)==1)
+ {
+   t=-camera.output_pid/180;
+ }
+ else
+ {
+   t=0;
+ }
+ PhoenixDrive_setSpeed(&drive,0,0,t);
+}
+void Imu()
+{
+   //si orienta verso la imu
+  if(imu_flag==true)
+  {
+     t=-imu.output_pid/180;
+     y=0;
+  }
+  else
+  {
+    y=-1;
+    t=0;
+  }
+  PhoenixDrive_setSpeed(&drive,0,y,t);
+}
+void lineeB()
+{
+  //si orienta verso la palla
+  if(PhoenixLineHandler_getStatus(&line_handler)==1)
+  {
+    Serial.println("Liena rilevata ");
+    PhoenixDrive_setSpeed(&drive,PhoenixLineHandler_getEscapeX(&line_handler),PhoenixLineHandler_getEscapeY(&line_handler),0);
+  }
+  /*else
+  {
+    PhoenixDrive_setSpeed(&drive,0,0,0);
+  }*/
+}
+
 
 void loop() 
 {
  idle_time++;
  PhoenixImu_handle(&imu);
  PhoenixCamera_handle(&camera);
- //PhoenixLineSensor_handle(&line_sensors);
  PhoenixLineHandler_handle(&line_handler);
- //PhoenixCamera_print(&camera);
- YatiliPlayFn();
- //PhoenixImu_print(&imu);
- //SteoraPlayFn() ;
- //fnFollowBall();
-  //non so se mettere while o if
-  //spena utilizza un if proverò con quello
-  if(PhoenixLineHandler_getStatus==1)
-  {
-    /*PhoenixLineSensor_handle(&line_sensors);*/
-    PhoenixLineHandler_handle(&line_handler);
-    PhoenixDrive_setSpeed(&drive,PhoenixLineHandler_getEscapeX(&line_handler),PhoenixLineHandler_getEscapeY(&line_handler),0);
-    PhoenixDrive_handle(&drive);
-    
-  }
-  for(int i=0;i<6;i++)
-  {
-    Serial.print(" stato: ");
-    Serial.print(PhoenixLineSensor_getStatus(&line_sensors[i]));
-    Serial.print(" misura: ");
-    Serial.print(line_sensors[i].misura);
-    Serial.print("  soglia: ");
-    Serial.print(line_sensors[i].soglia);
-    Serial.print("\t");    
-  }
-  Serial.println("");  
+ //SteoraPlayFn();
+ //YatiliPlayFn();
+ //Imu();
+ Serial.println(imu.errore);
+
+PhoenixDrive_setSpeed(&drive,0,0,t);
+PhoenixDrive_handle(&drive);
+ 
+ 
+  
   
 }

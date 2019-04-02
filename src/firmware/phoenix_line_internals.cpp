@@ -31,11 +31,18 @@ void PhoenixLineSensor_handle(PhoenixLineSensor* d)
       d->misura_min=d->misura;
     }
   }
-
-  if(d->misura > d->soglia)
+  else
   {
-	  d->detect_flag = 1;
+    if(d->misura > d->soglia)
+    {
+      d->detect_flag = 1;
+    }
+    if(d->misura < d->soglia)
+    {
+      d->detect_flag = 0;
+    }
   }
+  
 }
 
 void PhoenixLineSensor_startCalib(PhoenixLineSensor* d)
