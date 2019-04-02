@@ -214,7 +214,7 @@ PhoenixLineSensor line_sensors[NUM_LINE_SENSORS] =
   misura_max : 0,
   detect_flag : 0,
   calibra_flag : 0,
-  pin_reading: 0
+  pin_reading: A0
   },
   {// Sensore 1
   x : 84.051,
@@ -225,7 +225,7 @@ PhoenixLineSensor line_sensors[NUM_LINE_SENSORS] =
   misura_max : 0,
   detect_flag : 0,
   calibra_flag : 0,
-  pin_reading: 0
+  pin_reading: A1
   },
   {// Sensore 2
   x : 61.6838,
@@ -236,7 +236,7 @@ PhoenixLineSensor line_sensors[NUM_LINE_SENSORS] =
   misura_max : 0,
   detect_flag : 0,
   calibra_flag : 0,
-  pin_reading: 0
+  pin_reading: A2
   },
   {// Sensore 3
   x : -61.2579,
@@ -247,7 +247,7 @@ PhoenixLineSensor line_sensors[NUM_LINE_SENSORS] =
   misura_max : 0,
   detect_flag : 0,
   calibra_flag : 0,
-  pin_reading: 0
+  pin_reading: A3
   },
   {// Sensore 4
   x : -83.8843,
@@ -258,7 +258,7 @@ PhoenixLineSensor line_sensors[NUM_LINE_SENSORS] =
   misura_max : 0,
   detect_flag : 0,
   calibra_flag : 0,
-  pin_reading: 0
+  pin_reading: A4
   },
   {// Sensore 5
   x : -39.00,
@@ -269,7 +269,7 @@ PhoenixLineSensor line_sensors[NUM_LINE_SENSORS] =
   misura_max : 0,
   detect_flag : 0,
   calibra_flag : 0,
-  pin_reading: 0
+  pin_reading: A5
   } 
 };
 PhoenixLineHandler line_handler;
@@ -301,8 +301,8 @@ PhoenixCamera camera=
   ball_y:0,
   ball_w:0,
   ball_h:0,
-  ki:0.05,
-  kp:1.5,
+  ki:90,
+  kp:1,
   kd:0.05,
   output_pid:0,
   max_output:180,

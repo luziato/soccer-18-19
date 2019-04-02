@@ -51,10 +51,15 @@ void PhoenixLineHandler_reset(PhoenixLineHandler* h)
 void PhoenixLineHandler_handle(PhoenixLineHandler* h)
 {
   uint8_t a=0;
-  PhoenixLineSensor_handle;
+  for(int j=0;j<NUM_LINEDETECTORS;j++)
+  {
+    PhoenixLineSensor_handle(&h->line_sensors[j]);
+  }
+  
+if(h->calib_flag==0)
+{
   for(int i=0;i<NUM_LINEDETECTORS;i++)
   {
-
     if(mask_read(&h->mask,i)==0)
     {
       a=PhoenixLineSensor_getStatus(&h->line_sensors[i]);
@@ -77,6 +82,8 @@ void PhoenixLineHandler_handle(PhoenixLineHandler* h)
       }
     }
   }
+}
+  
 }
 
 uint8_t PhoenixLineHandler_getStatus(PhoenixLineHandler* h)

@@ -1,4 +1,4 @@
-#define pin A0
+#define pin A5
 int val=0;
 
 void setup() 

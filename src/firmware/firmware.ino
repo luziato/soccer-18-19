@@ -27,6 +27,40 @@
 #include "phoenix_eeprom.h"
 #include "utils.h"
 struct Timer* test1;
+bool cal=true;
+//funzione caliba
+/*
+e start calib
+faccio giraare il robot su se stesso
+nel frattempo lancio phonix line handler,
+fermo il robot e fermo la calibrazione,
+dopodichè lancio store line sensor (sulla eeprom)
+*/
+//se non caliobro
+/* carico i dati dalla emprom
+load line sensor*/
+void calibrazioneON()
+{
+  int start=millis(),attuale;
+  PhoenixLineHandler_startCalib(&line_handler);
+  while(attuale-start<(10000))
+  {
+    PhoenixDrive_setSpeed(&drive, 0, 0, 1);
+    PhoenixDrive_handle(&drive);
+    PhoenixLineHandler_handle(&line_handler);
+    attuale=millis();
+  }
+    PhoenixDrive_setSpeed(&drive, 0, 0, 0);
+    PhoenixDrive_handle(&drive);
+    PhoenixLineHandler_stopCalib(&line_handler);
+    PhoenixEeprom_storeLineSensor();
+}
+
+void calibrazioneOFF()
+{
+  PhoenixEeprom_loadLineSensor();
+}
+
 void setup() 
 {
   
@@ -77,6 +111,20 @@ void setup()
   Serial.println("Pixy initialized...");
   //eeprom
   PhoenixEeprom_init();
+
+  //calibrazione
+  if(cal==true)
+ {
+   Serial.println("in calibrazione...");
+   calibrazioneON();
+   cal=false;
+   Serial.println("calibrazione finita.");
+ }
+ else
+ {
+   calibrazioneOFF();
+   Serial.println("Prendo i dati dalla eeprom");
+ }
   sei();
 }
 
@@ -84,38 +132,7 @@ volatile uint16_t idle_time=0;
 volatile uint8_t test_joint_fn_state=0;
 volatile uint8_t test_joint_fn_joint_idx=0;
 
-//funzione caliba
-/*
-e start calib
-faccio giraare il robot su se stesso
-nel frattempo lancio phonix line handler,
-fermo il robot e fermo la calibrazione,
-dopodichè lancio store line sensor (sulla eeprom)
-*/
-//se non caliobro
-/* carico i dati dalla emprom
-load line sensor*/
-void calibrazioneON()
-{
-  int start=millis(),attuale;
-  PhoenixLineHandler_startCalib(&line_handler);
-  while(attuale-start<(10000))
-  {
-    PhoenixDrive_setSpeed(&drive, 0, 0, 1);
-    PhoenixDrive_handle(&drive);
-    PhoenixLineHandler_handle(&line_handler);
-    attuale=millis();
-  }
-    PhoenixDrive_setSpeed(&drive, 0, 0, 0);
-    PhoenixDrive_handle(&drive);
-    PhoenixLineHandler_stopCalib(&line_handler);
-    PhoenixEeprom_storeLineSensor();
-}
 
-void calibrazioneOFF()
-{
-  PhoenixEeprom_loadLineSensor();
-}
 
 void testJointsFn() 
 {
@@ -226,6 +243,8 @@ void YatiliPlayFn()
   double x=0;
   double y=0;
   double t=0;
+  int y_prec=0;
+  double time;//tempo in cui è stata vista l'ultima volta la palla
 //handle
 PhoenixCamera_handle(&camera);
 PhoenixImu_handle(&imu);
@@ -239,6 +258,20 @@ if(PhoenixCamera_getBallStatus(&camera)==1)
   {
     y=1;
   }
+  y_prec=camera.ball_y;//ultima ball_y rilevata
+}
+else if((millis()-time)<(5500))
+{
+ //mi giro verso l'ultimo outpud_pid
+ t=-camera.output_pid/180;
+ //y
+ //se la y<180 non ho la palletta
+ //se la y>180 ho la palletta
+ //più la palletta si allontana più y è piccolo
+ if(y_prec<180)
+ {
+  y=1;
+ }
 }
 else
 {
@@ -249,14 +282,14 @@ else
 PhoenixDrive_setSpeed(&drive, x, y, t);
 PhoenixDrive_handle(&drive);
 }
-/*void fnFollowBall()
+void fnFollowBall()
 {
   double x=0;
   double y=0;
   double t=0;
   int x_prec=0;
   int y_prec=0;
-  int t=millis();//tempo in cui è stata vista l'ultima volta la palla
+  double time;//tempo in cui è stata vista l'ultima volta la palla
   PhoenixCamera_handle(&camera);
   PhoenixImu_handle(&imu);
  if(PhoenixCamera_getBallStatus(&camera)==1)
@@ -264,7 +297,7 @@ PhoenixDrive_handle(&drive);
     t=millis();
     //traiettoria
     x=-sin(degToRad(imu.errore));
-    y=1-cos(degToRad(imu.errore));
+    //y=1-cos(degToRad(imu.errore));
     t=-camera.output_pid/180;
     if(abs(x)<0.5)
     {
@@ -273,26 +306,32 @@ PhoenixDrive_handle(&drive);
     x_prec=camera.ball_x;//ultima ball_x rilevata
     y_prec=camera.ball_y;//ultima ball_y rilevata
   }
-  else if((millis()-time)<(1000))
+  else if((millis()-time)<(5500))
   {
+    //x
     if(x_prec>0.5)
     {
       t=1;
       //se la x precedente è positivo si gira verso destra
+      x=1;
       //nel caso del potriere si deve spostare verso destra
     }
-    else if(x_prec<-0.5)
+    if(x_prec<-0.5)
     {
       t=-1;
       //se la x precedente è negativa si gira verso sinistra
+      x=-1;
       //nel caso del portiere si deve spostare verso sinistra
     }
-    if(y_prec>0.5)
+
+    //y
     //se la y<180 non ho la palletta
     //se la y>180 ho la palletta
     //più la palletta si allontana più y è piccolo
+    if(y_prec<175)
     {
       y=1;
+      y=0;
     }
     
   }
@@ -306,41 +345,41 @@ PhoenixDrive_handle(&drive);
   PhoenixDrive_setSpeed(&drive,x,y,t);
   PhoenixDrive_handle(&drive);
 
-}*/
+}
 
-bool cal=false;
+
 void loop() 
 {
-  idle_time++;
- if(cal==true)
- {
-   calibrazioneON();
-   cal=false;
- }
- else
- {
-   calibrazioneOFF();
- }
- 
+ idle_time++;
  PhoenixImu_handle(&imu);
  PhoenixCamera_handle(&camera);
+ //PhoenixLineSensor_handle(&line_sensors);
  PhoenixLineHandler_handle(&line_handler);
- PhoenixCamera_print(&camera);
+ //PhoenixCamera_print(&camera);
  YatiliPlayFn();
  //PhoenixImu_print(&imu);
  //SteoraPlayFn() ;
-
- /*
-  PhoenixImu_print(&imu);
- PhoenixDrive_setSpeed(&drive, 0, 0.5, (-imu.output_pid/180));
- PhoenixDrive_handle(&drive);
- */
-
+ //fnFollowBall();
   //non so se mettere while o if
-  while(PhoenixLineHandler_getStatus==1)
+  //spena utilizza un if proverò con quello
+  if(PhoenixLineHandler_getStatus==1)
   {
+    /*PhoenixLineSensor_handle(&line_sensors);*/
+    PhoenixLineHandler_handle(&line_handler);
     PhoenixDrive_setSpeed(&drive,PhoenixLineHandler_getEscapeX(&line_handler),PhoenixLineHandler_getEscapeY(&line_handler),0);
     PhoenixDrive_handle(&drive);
+    
   }
+  for(int i=0;i<6;i++)
+  {
+    Serial.print(" stato: ");
+    Serial.print(PhoenixLineSensor_getStatus(&line_sensors[i]));
+    Serial.print(" misura: ");
+    Serial.print(line_sensors[i].misura);
+    Serial.print("  soglia: ");
+    Serial.print(line_sensors[i].soglia);
+    Serial.print("\t");    
+  }
+  Serial.println("");  
   
 }

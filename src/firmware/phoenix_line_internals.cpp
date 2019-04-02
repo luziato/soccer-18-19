@@ -13,7 +13,7 @@ void PhoenixLineSensor_init(PhoenixLineSensor* d)
   d->misura_min=65535;
   d->misura_max=0;
   d->soglia=0;
-
+  pinMode(d->pin_reading,INPUT);
 }
 
 
@@ -22,11 +22,11 @@ void PhoenixLineSensor_handle(PhoenixLineSensor* d)
   d->misura=analogRead(d->pin_reading);
   if(d->calibra_flag==true)
   {
-    if(d->misura>d->misura_max)
+    if(d->misura>d->misura_max||d->misura==d->misura_max)
     {
       d->misura_max=d->misura;
     }
-    if(d->misura<d->misura_min)
+    if(d->misura<d->misura_min||d->misura==d->misura_min)
     {
       d->misura_min=d->misura;
     }
