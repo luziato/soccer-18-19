@@ -34,7 +34,7 @@ double t=0;
 double x_prec=0;
 double y_prec=0;
 double time;//tempo in cui è stata vista l'ultima volta la palla
-bool imu_flag;//controlla se la imu è inizializzata
+bool imu_flag=false;//controlla se la imu è inizializzata
 //funzione caliba
 /*
 e start calib
@@ -107,7 +107,7 @@ void setup()
     Serial.println("IMU initialized...");
     PhoenixImu_handle(&imu);
     PhoenixImu_setOffset(&imu,imu.heading_attuale);
-    imu_flag=true;
+   // imu_flag=true;
    }
    else
    {
@@ -344,19 +344,6 @@ void fnFollowBall()
   PhoenixDrive_handle(&drive);
 
 }
-
-void ball()
-{
-  if(PhoenixCamera_getBallStatus(&camera)==1)
- {
-   t=-camera.output_pid/180;
- }
- else
- {
-   t=0;
- }
- PhoenixDrive_setSpeed(&drive,0,0,t);
-}
 void Imu()
 {
    //si orienta verso la imu
@@ -372,6 +359,99 @@ void Imu()
   }
   PhoenixDrive_setSpeed(&drive,0,y,t);
 }
+
+void ball()
+{
+  if(imu_flag==true)
+ { 
+   if(PhoenixCamera_getBallStatus(&camera)==1)
+   {
+    time=millis();
+    //traiettoria
+    x=-sin(degToRad(imu.errore));
+    y=1-cos(degToRad(imu.errore));
+    t=-camera.output_pid/180;
+    if(abs(x)<0.7)
+    {
+     y=1;
+    }  
+    x_prec=camera.ball_x;
+    y_prec=camera.ball_y;
+   }
+ 
+   else if((millis()-time)<(2500))//se non la vedo da poco
+  {
+    //mi giro verso l'ultimo outpud_pid
+    t=-camera.output_pid/180;
+    //y
+    //se la y<180 non ho la palletta
+    //se la y>180 ho la palletta
+    //più la palletta si allontana più y è piccolo
+    if(y_prec<180)
+    {
+      y=0.75;
+    }
+  }
+ 
+  else
+  { 
+     if((millis()-time)>5000)//se non la vedo da tanto
+     {
+       t=0.25;
+       y=0;
+       x=0;
+     }
+     else
+     {
+       //t=-camera.output_pid/180;
+       y=-1;
+     }   
+  }
+ }
+ if(imu_flag==false)//no bussola
+ {
+   if(PhoenixCamera_getBallStatus(&camera)==1)
+   {
+      t=(0.25)*(-camera.output_pid/180);
+      x=camera.output_pid/180;
+      y=0;
+      time=millis();
+      x_prec=camera.ball_x;
+      y_prec=camera.ball_y;
+   }
+  else if((millis()-time)<(2500))//se non la vedo da poco
+  {
+    //mi giro verso l'ultimo outpud_pid
+    x=camera.output_pid/180;
+    //y
+    //se la y<180 non ho la palletta
+    //se la y>180 ho la palletta
+    //più la palletta si allontana più y è piccolo
+    if(y_prec<180)
+    {
+      y=0;
+    }
+  }
+  else
+  { 
+    if((millis()-time)>5000)//se non la vedo da tanto
+    {
+      t=0;
+      y=0;
+      x=0.20;
+    }
+   else
+   {
+    t=0;
+    y=-1;
+    x=0;
+   }
+ }
+ }
+ PhoenixDrive_setSpeed(&drive,x,y,t);
+
+}
+
 void lineeB()
 {
   //si orienta verso la palla
@@ -390,18 +470,23 @@ void lineeB()
 void loop() 
 {
  idle_time++;
+ //handle di tutti i sensori
  PhoenixImu_handle(&imu);
  PhoenixCamera_handle(&camera);
  PhoenixLineHandler_handle(&line_handler);
- //SteoraPlayFn();
- //YatiliPlayFn();
- //Imu();
+
+
+
+ 
+ ball();
+ lineeB();
+ 
+ 
+
  Serial.println(imu.errore);
 
-PhoenixDrive_setSpeed(&drive,0,0,t);
+PhoenixDrive_setSpeed(&drive,x,y,t);
 PhoenixDrive_handle(&drive);
- 
- 
   
   
 }
