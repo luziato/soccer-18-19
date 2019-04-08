@@ -3,11 +3,12 @@
  **/
 
 #include "phoenix_globals.h"
-
 /*
+
 *                         *
 **********STEORA***********
 *                         *
+
 PhoenixJoint joints[NUM_JOINTS] = 
 {
   //senso orario
@@ -122,9 +123,9 @@ PhoenixImu imu =
   errore:0,
   output_pid:0,
   max_output:180,
-  ki:80,
-  kp:3,
-  kd:0.005,
+  ki:130,
+  kp:3.3,
+  kd:0.5,
   errore_prec:0,
   dt:0.001,
   idt:1000,
@@ -139,9 +140,9 @@ PhoenixCamera camera=
   ball_y:0,
   ball_w:0,
   ball_h:0,
-  ki:0,
+  ki:1,
   kp:1.5,
-  kd:0,
+  kd:0.5,
   output_pid:0,
   max_output:180,
   errore:0,
@@ -151,9 +152,9 @@ PhoenixCamera camera=
   sum_i:0,
   max_i:180,
 };
+
+
 */
-
-
 
 
 
@@ -177,24 +178,24 @@ PhoenixJoint joints[NUM_JOINTS] =
   //sinistra: joint 2
   {
   // Joint 0 
-  pin_dira : 23,
-  pin_dirb : 28,
+  pin_dira : 28,
+  pin_dirb : 23,
   pin_pwm : 3,
   direzione : 0,
   velocita : 0
   },
   {
   // Joint 1 
-  pin_dira : 22,
-  pin_dirb : 27,
+  pin_dira : 27,
+  pin_dirb : 22,
   pin_pwm : 2,
   direzione : 0,
   velocita : 0
   },
   {
   // Joint 2 
-  pin_dira : 24,
-  pin_dirb : 29,
+  pin_dira : 29,
+  pin_dirb : 24,
   pin_pwm : 4,
   direzione : 0,
   velocita : 0
@@ -284,9 +285,9 @@ PhoenixImu imu =
   errore:0,
   output_pid:0,
   max_output:180,
-  ki:122.5,
+  ki:80,
   kp:3,
-  kd:0.00055,
+  kd:0.005,
   errore_prec:0,
   dt:0.001,
   idt:1000,
