@@ -46,6 +46,7 @@ void PhoenixLineHandler_reset(PhoenixLineHandler* h)
 
 }
 
+int c;
 
 //mask è l'unica parte della funzione che non viene resettata
 void PhoenixLineHandler_handle(PhoenixLineHandler* h)
@@ -58,10 +59,13 @@ void PhoenixLineHandler_handle(PhoenixLineHandler* h)
   
 if(h->calib_flag==0)
 {
+
   if(h->escape_flag==1)
   {
+    
     h->escape_ttl-=1;
   }
+
   if(h->escape_ttl==0)
   {
     PhoenixLineHandler_reset(h);
@@ -71,7 +75,15 @@ if(h->calib_flag==0)
     if(mask_read(&h->mask,i)==0)
     {
       a=PhoenixLineSensor_getStatus(&h->line_sensors[i]);
-      if(a>0)
+      if(a>0)//cambiamento di stato da 0 a 1
+      {
+        c++;
+      }
+      if(a<0)//cambiamento di stato da 1 a 0
+      {
+        c--;
+      }
+      if(c>2)//quando ho visto per più letture la linea
       {
         mask_setBit(&h->mask,i);
         h->escape_x-=h->line_sensors[i].x;

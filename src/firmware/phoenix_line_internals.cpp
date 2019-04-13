@@ -36,10 +36,12 @@ void PhoenixLineSensor_handle(PhoenixLineSensor* d)
     if(d->misura > d->soglia)
     {
       d->detect_flag = 1;
+      d->soglia-=20;//trigger di Schmitt
     }
     if(d->misura < d->soglia)
     {
       d->detect_flag = 0;
+      d->soglia+=20;//trigger di Schmitt
     }
   }
   
